@@ -1,11 +1,22 @@
-const express = require('express')
+const express = require('express');
 const cors = require("cors");
+const bodyParser = require('body-parser');
+const port = process.env.PORT || 3000;
+const app = express();
+
+let JobController = require('./controller/JobController.js');
+
 require("dotenv").config();
 
-const app = express()
+//body-parser configuration
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
-const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+//Job post routes
+app.post('/openings/addjob', JobController.saveJobPost);
+
+app.listen(port, () => console.log(`Hiring app listening on port ${port}!`))
