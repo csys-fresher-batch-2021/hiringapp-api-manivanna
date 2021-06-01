@@ -12,10 +12,10 @@ class JobOfferDao{
                             VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
         try{
             let client = await pool.connect();
-            client.query(jobQuery, job);
-            console.log("Job added successfully");
+            let result = await client.query(jobQuery, job);
+            return result;
         } catch(err){
-            console.log(err);
+            throw new Error("Connection failed");
         }
     }
 }

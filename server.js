@@ -1,12 +1,13 @@
 const express = require('express');
 const cors = require("cors");
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 3000;
+
+require("dotenv").config();
+
+const port = process.env.PORT;
 const app = express();
 
 let JobController = require('./controller/JobController.js');
-
-require("dotenv").config();
 
 //body-parser configuration
 app.use(bodyParser.urlencoded({

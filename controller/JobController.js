@@ -7,7 +7,15 @@ class JobController{
     * @param {*} res 
     */
    static async saveJobPost(req, res){
-       await JobOfferService.saveJobPost(req.body);
+       try{
+            let status = await JobOfferService.saveJobPost(req.body);
+            if(status != null){
+                res.status(200).json({message: "success"});
+                console.log("Job added Successfully");
+            }
+       } catch(err){
+           res.status(400).json({errorMessage: err.message});
+       }
    }
 }
 
