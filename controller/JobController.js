@@ -27,6 +27,21 @@ class JobController{
            res.status(400).json({errorMessage: err.message});
        }
    }
+
+   /**
+    * Function to get updated job detail from form.
+    * @param {*} req 
+    * @param {*} res 
+    */
+    static async updateJobPost(req, res){
+        let id = req.params.id;
+        let result = await JobOfferService.updateJobPost(id, req.body);
+        if(result != null){
+             res.status(200).json({message: "success"});
+         } else{
+             res.status(400).json({message: "failed"});
+         }
+    }
 }
 
 module.exports = JobController;

@@ -20,5 +20,6 @@ app.use(cors());
 //Job post routes
 app.get('/openings/jobs', JobController.getJobPosts);
 app.post('/openings/addjob', JobController.saveJobPost);
+app.put('/openings/updatejob/:id', JobController.updateJobPost);
 
 app.listen(port, () => console.log(`Hiring app listening on port ${port}!`))
