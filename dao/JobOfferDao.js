@@ -2,6 +2,20 @@ let pool = require('./connection.js');
 
 class JobOfferDao{
     /**
+     * Function to retrieve all job posts from database.
+     */
+    static async getJobPosts(){
+        let jobQuery = 'SELECT * FROM JOBOFFERS';
+        try{
+            let client = await pool.connect();
+            let result = await client.query(jobQuery);
+            return result.rows;
+        } catch(err){
+            console.log(err);
+        }
+    }
+    
+    /**
      * Function to save new job to database.
      * @param {*} job 
      */

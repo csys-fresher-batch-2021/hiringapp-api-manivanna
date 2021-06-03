@@ -2,6 +2,13 @@ let JobOfferDao = require('../dao/JobOfferDao.js');
 let InputValidator = require('../validator/InputValidator.js');
 
 class JobOfferService{
+     /**
+     * Function to get all available jobs.
+     */
+    static getJobPosts(){
+        return JobOfferDao.getJobPosts();
+    }
+    
     /**
      * Function to send a new job post to dao.
      * @param {*} job 

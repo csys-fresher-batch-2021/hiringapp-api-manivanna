@@ -1,6 +1,16 @@
 let JobOfferService = require('../service/JobOfferService.js');
 
 class JobController{
+    /**
+     * Function to get all available jobs.
+     * @param {*} req 
+     * @param {*} res 
+     */
+   static async getJobPosts(req, res){
+        let result = await JobOfferService.getJobPosts();
+        res.send(result);
+    }
+    
    /**
     * Function to get new job post from form.
     * @param {*} req 
