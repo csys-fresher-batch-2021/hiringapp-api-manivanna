@@ -30,6 +30,18 @@ class JobOfferService{
             throw new Error("Invalid Experience");
         }
     }
+
+    /**
+     * Function to send updated job details to dao. 
+     * @param {*} id 
+     * @param {*} updatedData 
+     */
+    static updateJobPost(id, updatedData){
+        let updatedJob = [updatedData.jobtitle, updatedData.jobtype, updatedData.description, updatedData.skills, 
+            updatedData.minyears, updatedData.maxyears, updatedData.minsalary, updatedData.maxsalary, 
+            updatedData.location, updatedData.vacancy, updatedData.qualification, id];  //adding updated job details and job id to array
+        return JobOfferDao.update(updatedJob);
+    }
 }
 
 module.exports = JobOfferService;
