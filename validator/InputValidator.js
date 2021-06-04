@@ -46,7 +46,7 @@ class InputValidator{
      */
     static checkEmptyData(data){
         let isValid = false;
-        if(data.trim().length < 1){
+        if(data.toString().trim().length < 1){
             isValid = true;
         }
         return isValid;

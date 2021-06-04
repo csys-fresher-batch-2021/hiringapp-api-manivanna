@@ -9,6 +9,7 @@ const app = express();
 
 const JobController = require('./controller/JobController.js');
 const ApplicantController = require('./controller/ApplicantController.js');
+const ApplicationController = require('./controller/ApplicationController.js');
 
 //body-parser configuration
 app.use(bodyParser.urlencoded({
@@ -28,5 +29,6 @@ app.get('/api/jobs/:id', JobController.getJobById);
 //Applicant Routes
 app.post('/api/user/signup', ApplicantController.addNewUser);
 app.post('/api/user/login', ApplicantController.authenticateUser);
+app.post('/api/user/:jobid/apply', ApplicationController.saveApplication);
 
 app.listen(port, () => console.log(`Hiring app listening on port ${port}!`))
