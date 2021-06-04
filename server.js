@@ -7,7 +7,8 @@ require("dotenv").config();
 const port = process.env.PORT;
 const app = express();
 
-let JobController = require('./controller/JobController.js');
+const JobController = require('./controller/JobController.js');
+const ApplicantController = require('./controller/ApplicantController.js');
 
 //body-parser configuration
 app.use(bodyParser.urlencoded({
@@ -23,5 +24,8 @@ app.post('/api/jobs', JobController.saveJobPost);
 app.put('/api/jobs/:id', JobController.updateJobPost);
 app.delete('/api/jobs/:id', JobController.deleteJobPost);
 app.get('/api/jobs/:id', JobController.getJobById);
+
+//Applicant Routes
+app.post('/api/user/signup', ApplicantController.addNewUser);
 
 app.listen(port, () => console.log(`Hiring app listening on port ${port}!`))
