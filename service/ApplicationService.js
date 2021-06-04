@@ -38,6 +38,14 @@ class ApplicationService{
             console.log("Error job details not available.");
         }
     }
+
+    /**
+     * Function to get all applications applied by an applicant using email.
+     * @param {*} email 
+     */
+    static getApplicationsByEmail(email){
+        return ApplicationDao.getApplicationsByEmail(email);
+    }
 }
 
 module.exports = ApplicationService;
