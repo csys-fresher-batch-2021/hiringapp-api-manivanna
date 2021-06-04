@@ -27,6 +27,17 @@ class JobController{
        }
    }
 
+    /**
+    * Function to get job details by id.
+    * @param {*} req 
+    * @param {*} res 
+    */
+    static async getJobById(req, res){
+        let id = req.params.id;
+        let result = await JobService.getJobById(id); 
+        res.send(result);
+    }
+
    /**
     * Function to get updated job detail from form.
     * @param {*} req 

@@ -39,6 +39,22 @@ class JobDao{
     }
 
     /**
+     * Function to get a job details by using id.
+     * @param {*} id 
+     */
+    static async getJobById(id){
+        let jobQuery = `SELECT * FROM JOBOFFERS WHERE ID=$1`;
+        let params = [id];
+        try{
+            let client = await pool.connect();
+            let result = await client.query(jobQuery, params);
+            return result.rows[0];
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    /**
      * Function to a update job post in database using job id.
      * @param {*} updatedJob 
      */
