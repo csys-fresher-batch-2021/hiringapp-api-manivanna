@@ -19,6 +19,17 @@ class ApplicantService{
             throw new Error("Email address already in use");
         }
     }
+
+    /**
+     * Function to authenticate user.
+     * @param {*} email 
+     * @param {*} password 
+     */
+    static authenticateUser(user){
+        let email = user.email;
+        let password = user.password;
+        return ApplicantDao.authenticateUser(email, password);
+    }
 }
 
 module.exports = ApplicantService;

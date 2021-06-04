@@ -18,6 +18,18 @@ class ApplicantDao{
     }
 
     /**
+     * Function to check whether user is available in database for authentication.
+     * @param {*} user 
+     */
+    static async authenticateUser(email, password){
+        const userQuery = "SELECT * FROM APPLICANT WHERE EMAIL=$1 AND PASSWORD=$2";
+        let params = [email, password];
+        let client = await pool.connect();
+        let result = await client.query(userQuery, params);
+        return result.rows;
+    }
+
+    /**
      * Function to check email already in use.
      * @param {*} email 
      */

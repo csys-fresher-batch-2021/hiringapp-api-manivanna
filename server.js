@@ -27,5 +27,6 @@ app.get('/api/jobs/:id', JobController.getJobById);
 
 //Applicant Routes
 app.post('/api/user/signup', ApplicantController.addNewUser);
+app.post('/api/user/login', ApplicantController.authenticateUser);
 
 app.listen(port, () => console.log(`Hiring app listening on port ${port}!`))
