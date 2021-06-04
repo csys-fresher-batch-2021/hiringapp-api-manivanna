@@ -22,5 +22,6 @@ app.get('/api/jobs', JobController.getJobPosts);
 app.post('/api/jobs', JobController.saveJobPost);
 app.put('/api/jobs/:id', JobController.updateJobPost);
 app.delete('/api/jobs/:id', JobController.deleteJobPost);
+app.get('/api/jobs/:id', JobController.getJobById);
 
 app.listen(port, () => console.log(`Hiring app listening on port ${port}!`))

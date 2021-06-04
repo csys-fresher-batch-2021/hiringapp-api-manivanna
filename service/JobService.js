@@ -29,6 +29,14 @@ class JobService{
     }
 
     /**
+     * Function to get job post details
+     * @param {*} id 
+     */
+    static getJobById(id){
+        return JobDao.getJobById(id);
+    }
+
+    /**
      * Function to send updated job details to dao. 
      * @param {*} id 
      * @param {*} updatedData 
