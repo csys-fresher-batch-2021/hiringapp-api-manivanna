@@ -17,6 +17,20 @@ class ApplicationController{
             res.status(400).json({message: err.message});   
         }
     }
+
+    /**
+     * Function to get all applications applied by an applicant using email.
+     * @param {*} email 
+     */
+    static async getApplicationsByEmail(req, res){
+        let email = req.params.email;
+        let result = await ApplicationService.getApplicationsByEmail(email);
+        if(result.length > 0){
+            res.status(200).json(result);
+        } else{
+            res.status(400).json({message: "failed"});
+        }
+    }
 }
 
 module.exports = ApplicationController;
