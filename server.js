@@ -18,8 +18,9 @@ app.use(express.json());
 app.use(cors());
 
 //Job post routes
-app.get('/openings/jobs', JobController.getJobPosts);
-app.post('/openings/addjob', JobController.saveJobPost);
-app.put('/openings/updatejob/:id', JobController.updateJobPost);
+app.get('/api/jobs', JobController.getJobPosts);
+app.post('/api/jobs', JobController.saveJobPost);
+app.put('/api/jobs/:id', JobController.updateJobPost);
+app.delete('/api/jobs/:id', JobController.deleteJobPost);
 
 app.listen(port, () => console.log(`Hiring app listening on port ${port}!`))

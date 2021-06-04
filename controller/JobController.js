@@ -1,4 +1,4 @@
-let JobOfferService = require('../service/JobOfferService.js');
+let JobService = require('../service/JobService.js');
 
 class JobController{
     /**
@@ -7,7 +7,7 @@ class JobController{
      * @param {*} res 
      */
    static async getJobPosts(req, res){
-        let result = await JobOfferService.getJobPosts();
+        let result = await JobService.getJobPosts();
         res.send(result);
     }
     
@@ -18,10 +18,9 @@ class JobController{
     */
    static async saveJobPost(req, res){
        try{
-            let status = await JobOfferService.saveJobPost(req.body);
+            let status = await JobService.saveJobPost(req.body);
             if(status != null){
                 res.status(200).json({message: "success"});
-                console.log("Job added Successfully");
             }
        } catch(err){
            res.status(400).json({errorMessage: err.message});
@@ -35,12 +34,27 @@ class JobController{
     */
     static async updateJobPost(req, res){
         let id = req.params.id;
-        let result = await JobOfferService.updateJobPost(id, req.body);
+        let result = await JobService.updateJobPost(id, req.body);
         if(result != null){
              res.status(200).json({message: "success"});
          } else{
              res.status(400).json({message: "failed"});
          }
+    }
+
+     /**
+    * Function to get job id from url to delete a job.
+    * @param {*} req 
+    * @param {*} res 
+    */
+   static async deleteJobPost(req, res){
+        let id = req.params.id;
+        let result = await JobService.deleteJobPost(id);
+        if(result.rowCount > 0){
+            res.status(200).json({message: "success"});
+        } else{
+            res.status(400).json({message: "failed"});
+        }
     }
 }
 
