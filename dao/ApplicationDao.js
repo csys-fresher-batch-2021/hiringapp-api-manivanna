@@ -2,6 +2,20 @@ let pool = require('./connection.js');
 
 class ApplicationDao{
     /**
+     * Function to retrieve all applications from database.
+     */
+    static async getApplications(){
+        let appQuery = 'SELECT * FROM APPLICATIONS';
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery);
+            return result.rows;
+        } catch(err){
+            console.log(err);
+        }
+    }
+    
+    /**
      * Function to save new application to database.
      * @param {*} jobDetails
      * @param {*} application 

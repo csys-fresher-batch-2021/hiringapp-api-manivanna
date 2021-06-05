@@ -11,3 +11,5 @@
 ### Applicant
 #### Signup => completed
 #### Login => completed
+#### Apply job => completed
+#### List all applications by an user => completed

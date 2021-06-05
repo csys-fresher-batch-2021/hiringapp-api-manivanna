@@ -4,6 +4,13 @@ let InputValidator = require('../validator/InputValidator.js');
 
 class ApplicationService{
     /**
+     * Function to get all applications.
+     */
+    static getApplications(){
+        return ApplicationDao.getApplications();
+    }
+    
+    /**
      * Function to save new application.
      * @param {*} jobId
      * @param {*} application 

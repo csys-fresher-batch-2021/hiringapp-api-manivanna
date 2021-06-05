@@ -26,6 +26,9 @@ app.put('/api/jobs/:id', JobController.updateJobPost);
 app.delete('/api/jobs/:id', JobController.deleteJobPost);
 app.get('/api/jobs/:id', JobController.getJobById);
 
+//Recruiter Routes
+app.get('/api/applications', ApplicationController.getApplications);
+
 //Applicant Routes
 app.post('/api/user/signup', ApplicantController.addNewUser);
 app.post('/api/user/login', ApplicantController.authenticateUser);

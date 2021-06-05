@@ -2,6 +2,16 @@ let ApplicationService = require('../service/ApplicationService.js');
 
 class ApplicationController{
     /**
+     * Function to get all applications.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async getApplications(req, res){
+        let result = await ApplicationService.getApplications();
+        res.json(result);
+    }
+    
+    /**
      * Function to save new application.
      * @param {*} req 
      * @param {*} res 
