@@ -28,6 +28,7 @@ app.get('/api/jobs/:id', JobController.getJobById);
 
 //Recruiter Routes
 app.get('/api/applications', ApplicationController.getApplications);
+app.get("/api/applications/:id", ApplicationController.getApplicationById);
 
 //Applicant Routes
 app.post('/api/user/signup', ApplicantController.addNewUser);

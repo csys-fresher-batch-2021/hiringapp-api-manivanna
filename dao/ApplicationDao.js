@@ -40,6 +40,21 @@ class ApplicationDao{
     }
 
     /**
+     * Function to retrieve an application from database by application id.
+     */
+    static async getApplicationById(id){
+        let appQuery = 'SELECT * FROM APPLICATIONS WHERE ID=$1';
+        let params = [id];
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery, params);
+            return result.rows[0];
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    /**
      * Function to get all applications applied by an applicant using email.
      * @param {*} email 
      */

@@ -13,3 +13,4 @@
 #### Login => completed
 #### Apply job => completed
 #### List all applications by an user => completed
+#### List all applications => completed
