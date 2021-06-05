@@ -55,6 +55,23 @@ class ApplicationDao{
     }
 
     /**
+     * Function to update an application score, status, comments.
+     * @param {*} application 
+     */
+    static async update(id, application){
+        let appQuery = `UPDATE APPLICATIONS SET SCORE=$1, STATUS=$2, COMMENTS=$3 WHERE ID=$4`;
+        let params = [application.score, application.status, application.comments, id];
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery, params);
+            console.log("Application updated successfully");
+            return result;
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    /**
      * Function to get all applications applied by an applicant using email.
      * @param {*} email 
      */

@@ -55,6 +55,15 @@ class ApplicationService{
     }
 
     /**
+     * Function to update an application.
+     * @param {*} id 
+     * @param {*} application 
+     */
+    static updateApplication(id, application){
+        return ApplicationDao.update(id, application);
+    }
+
+    /**
      * Function to get all applications applied by an applicant using email.
      * @param {*} email 
      */

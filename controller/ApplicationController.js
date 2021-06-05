@@ -40,6 +40,21 @@ class ApplicationController{
     }
 
     /**
+     * Function to update an application.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async updateApplication(req, res){
+        let id = req.params.id;
+        let result = await ApplicationService.updateApplication(id, req.body);
+        if(result != null){
+            res.status(200).json({message: "success"});
+        } else{
+            res.status(400).json({message: "failed"});
+        }
+    }
+
+    /**
      * Function to get all applications applied by an applicant using email.
      * @param {*} email 
      */
