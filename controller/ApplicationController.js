@@ -29,6 +29,17 @@ class ApplicationController{
     }
 
     /**
+     * Function to get an application by id.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async getApplicationById(req, res){
+        let id = req.params.id;
+        let result = await ApplicationService.getApplicationById(id);
+        res.json(result);
+    }
+
+    /**
      * Function to get all applications applied by an applicant using email.
      * @param {*} email 
      */

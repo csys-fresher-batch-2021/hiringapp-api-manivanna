@@ -31,4 +31,4 @@ create table applications(
     score int,
     status text,
     comments text
-)
+);

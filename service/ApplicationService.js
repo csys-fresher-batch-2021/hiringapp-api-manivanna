@@ -47,6 +47,14 @@ class ApplicationService{
     }
 
     /**
+     * Function to get an application by id.
+     * @param {*} id  
+     */
+    static async getApplicationById(id){
+        return ApplicationDao.getApplicationById(id);
+    }
+
+    /**
      * Function to get all applications applied by an applicant using email.
      * @param {*} email 
      */
