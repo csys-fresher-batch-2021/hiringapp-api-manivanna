@@ -1,6 +1,21 @@
 let pool = require('./connection.js');
 class SelectedListDao{
     /**
+     * Function to get all selected applications.
+     * @param {*} application 
+     */
+    static async getAll(){
+        let appQuery = `SELECT * FROM SELECTEDLIST`;
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery);
+            return result.rows;
+        } catch(err){
+            console.log(err);
+        }
+    }
+    
+    /**
      * Function to add new application to selectedlist table.
      * @param {*} application 
      */
@@ -28,6 +43,23 @@ class SelectedListDao{
     static async delete(id){
         let appQuery = `DELETE FROM SELECTEDLIST WHERE APPLICATIONID=$1`;
         let params = [id];
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery, params);
+            return result;
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    /**
+     * Function to update score for selectedlist application.
+     * @param {*} id 
+     * @param {*} score 
+     */
+    static async update(id, score){
+        let appQuery = `UPDATE SELECTEDLIST SET SCORE=$1 WHERE APPLICATIONID=$2`;
+        let params = [score, id];
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);

@@ -2,6 +2,14 @@ let SelectedListDao = require('../dao/SelectedListDao.js');
 let ApplicationService = require('./ApplicationService.js');
 class SelectedListService{
     /**
+     * Function to get all selected applications.
+     * @param {*} application 
+     */
+    static getSelectedList(){
+        return SelectedListDao.getAll();
+    }
+    
+    /**
      * Function to add new application to selectedlist.
      * @param {*} application 
      */
@@ -20,6 +28,15 @@ class SelectedListService{
      */
     static deleteSelectedList(id){
         return SelectedListDao.delete(id);
+    }
+
+    /**
+     * Function to update score for selected list.
+     * @param {*} id 
+     * @param {*} score 
+     */
+    static updateScore(id, score){
+        return SelectedListDao.update(id, score);
     }
 }
 
