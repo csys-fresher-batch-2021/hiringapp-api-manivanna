@@ -10,6 +10,7 @@ const app = express();
 const JobController = require('./controller/JobController.js');
 const ApplicantController = require('./controller/ApplicantController.js');
 const ApplicationController = require('./controller/ApplicationController.js');
+const SelectedListController = require('./controller/SelectedListController.js');
 
 //body-parser configuration
 app.use(bodyParser.urlencoded({
@@ -30,6 +31,7 @@ app.get('/api/jobs/:id', JobController.getJobById);
 app.get('/api/applications', ApplicationController.getApplications);
 app.get("/api/applications/:id", ApplicationController.getApplicationById);
 app.patch('/api/applications/:id', ApplicationController.updateApplication);
+app.post('/api/applications/:id/select', SelectedListController.addSelectedList);
 
 //Applicant Routes
 app.post('/api/user/signup', ApplicantController.addNewUser);
