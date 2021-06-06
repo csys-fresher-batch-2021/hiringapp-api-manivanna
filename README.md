@@ -16,3 +16,5 @@
 #### List all applications => completed
 #### List an application details => completed
 #### Update application => completed
+#### Remove an applicant from selected list => completed
+#### Display all selected list => completed
