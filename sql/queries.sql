@@ -32,3 +32,13 @@ create table applications(
     status text,
     comments text
 );
+
+create table selectedlist(
+    id serial primary key,
+    jobid int,
+    applicationid int,
+    name text,
+    email text,
+    jobtitle text,
+    score int
+);

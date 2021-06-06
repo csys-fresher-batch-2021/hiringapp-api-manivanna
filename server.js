@@ -32,6 +32,7 @@ app.get('/api/applications', ApplicationController.getApplications);
 app.get("/api/applications/:id", ApplicationController.getApplicationById);
 app.patch('/api/applications/:id', ApplicationController.updateApplication);
 app.post('/api/applications/:id/select', SelectedListController.addSelectedList);
+app.delete('/api/applications/:id/deselect', SelectedListController.deleteSelectedList);
 
 //Applicant Routes
 app.post('/api/user/signup', ApplicantController.addNewUser);

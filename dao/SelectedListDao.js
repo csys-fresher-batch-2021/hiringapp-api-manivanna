@@ -20,5 +20,21 @@ class SelectedListDao{
             console.log(err);
         }
     }
+
+    /**
+     * Function to delete an application from selectedlist table.
+     * @param {*} id 
+     */
+    static async delete(id){
+        let appQuery = `DELETE FROM SELECTEDLIST WHERE APPLICATIONID=$1`;
+        let params = [id];
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery, params);
+            return result;
+        } catch(err){
+            console.log(err);
+        }
+    }
 }
 module.exports = SelectedListDao;

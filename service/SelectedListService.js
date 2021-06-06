@@ -13,6 +13,14 @@ class SelectedListService{
             console.log("No record found");
         }
     }
+
+    /**
+     * Function to delete an application from selectedlist.
+     * @param {*} id 
+     */
+    static deleteSelectedList(id){
+        return SelectedListDao.delete(id);
+    }
 }
 
 module.exports = SelectedListService;
