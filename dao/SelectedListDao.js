@@ -9,6 +9,7 @@ class SelectedListDao{
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery);
+            client.release();
             return result.rows;
         } catch(err){
             console.log(err);
@@ -30,6 +31,7 @@ class SelectedListDao{
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
+            client.release();
             return result;
         } catch(err){
             console.log(err);
@@ -46,6 +48,7 @@ class SelectedListDao{
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
+            client.release();
             return result;
         } catch(err){
             console.log(err);
@@ -63,6 +66,7 @@ class SelectedListDao{
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
+            client.release();
             return result;
         } catch(err){
             console.log(err);

@@ -9,6 +9,7 @@ class JobDao{
         try{
             let client = await pool.connect();
             let result = await client.query(jobQuery);
+            client.release();
             return result.rows;
         } catch(err){
             console.log(err);
@@ -32,6 +33,7 @@ class JobDao{
             let client = await pool.connect();
             let result = await client.query(jobQuery, params);
             console.log("Job added successfully");
+            client.release();
             return result;
         } catch(err){
             console.log(err);
@@ -48,6 +50,7 @@ class JobDao{
         try{
             let client = await pool.connect();
             let result = await client.query(jobQuery, params);
+            client.release();
             return result.rows[0];
         } catch(err){
             console.log(err);
@@ -70,6 +73,7 @@ class JobDao{
             let client = await pool.connect();
             let result = client.query(jobQuery, params);
             console.log("Job updated successfully");
+            client.release();
             return result;
         } catch(err){
             console.log(err);
@@ -86,8 +90,9 @@ class JobDao{
         try{
             let client = await pool.connect();
             let result = client.query(jobQuery, params);
-            return result;
             console.log("Job deleted successfully");
+            client.release();
+            return result;
         } catch(err){
             console.log(err);
         }

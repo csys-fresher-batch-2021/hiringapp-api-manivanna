@@ -11,6 +11,7 @@ class ApplicantDao{
         try{
             let client = await pool.connect();
             let result = await client.query(userQuery, params);
+            client.release();
             return result;
         } catch(err){
             throw new Error("Database error");
@@ -24,9 +25,14 @@ class ApplicantDao{
     static async authenticateUser(email, password){
         const userQuery = "SELECT * FROM APPLICANT WHERE EMAIL=$1 AND PASSWORD=$2";
         let params = [email, password];
-        let client = await pool.connect();
-        let result = await client.query(userQuery, params);
-        return result.rows;
+        try{
+            let client = await pool.connect();
+            let result = await client.query(userQuery, params);
+            client.release();
+            return result.rows;
+        } catch(err){
+            throw new Error("Database error");
+        }
     }
 
     /**
@@ -36,9 +42,14 @@ class ApplicantDao{
     static async checkEmailExists(email){
         let userQuery = "SELECT * FROM APPLICANT WHERE EMAIL=$1";
         let params = [email];
-        let client = await pool.connect();
-        let result = await client.query(userQuery, params);
-        return result.rows;
+        try{
+            let client = await pool.connect();
+            let result = await client.query(userQuery, params);
+            client.release();
+            return result.rows;
+        } catch(err){
+            throw new Error("Database error");
+        }
     }
 }
 
