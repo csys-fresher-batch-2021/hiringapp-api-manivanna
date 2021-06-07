@@ -9,6 +9,7 @@ class ApplicationDao{
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery);
+            client.release();
             return result.rows;
         } catch(err){
             console.log(err);
@@ -33,6 +34,7 @@ class ApplicationDao{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
             console.log("Application added successfully");
+            client.release();
             return result;
         } catch(err){
             console.log(err);
@@ -48,6 +50,7 @@ class ApplicationDao{
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
+            client.release();
             return result.rows[0];
         } catch(err){
             console.log(err);
@@ -65,6 +68,7 @@ class ApplicationDao{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
             console.log("Application updated successfully");
+            client.release();
             return result;
         } catch(err){
             console.log(err);
@@ -81,6 +85,7 @@ class ApplicationDao{
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
+            client.release();
             return result.rows;
         } catch(err){
             console.log(err);
