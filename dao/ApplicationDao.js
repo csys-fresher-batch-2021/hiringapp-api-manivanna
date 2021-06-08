@@ -91,6 +91,24 @@ class ApplicationDao{
             console.log(err);
         }
     }
+
+    /**
+     * Function to check the user has already applied for the post.
+     * @param {*} id 
+     * @param {*} email 
+     */
+    static async checkApplicationDone(id, email){
+        let appQuery = `SELECT * FROM APPLICATIONS WHERE JOBID=$1 AND EMAIL=$2`;
+        let params = [id, email];
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery, params);
+            client.release();
+            return result.rows;
+        } catch(err){
+            console.log(err);
+        }
+    }
 }
 
 module.exports = ApplicationDao;

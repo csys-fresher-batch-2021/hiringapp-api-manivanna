@@ -17,7 +17,10 @@ class ApplicationService{
      */
     static async saveApplication(jobId, application){
         let jobDetails = await JobService.getJobById(jobId);
-
+        let alreadyApplied = await ApplicationDao.checkApplicationDone(jobId, application.email);
+        if(alreadyApplied.length > 0){
+            throw new Error("Application already submitted");
+        }
         let isInValidName = InputValidator.checkEmptyData(application.name);
         let isInValidEmail = InputValidator.checkEmptyData(application.email);
         let isInValidMobile = InputValidator.checkEmptyData(application.mobile);
