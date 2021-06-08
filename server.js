@@ -35,6 +35,7 @@ app.post('/api/applications/:id/select', SelectedListController.addSelectedList)
 app.delete('/api/applications/:id/deselect', SelectedListController.deleteSelectedList);
 app.get('/api/selected', SelectedListController.getSelectedList);
 app.put('/api/selected/score/:id', SelectedListController.updateScore);
+app.get('/api/dashboard', SelectedListController.getStatus);
 
 //Applicant Routes
 app.post('/api/user/signup', ApplicantController.addNewUser);

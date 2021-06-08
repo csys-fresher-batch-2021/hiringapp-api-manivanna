@@ -13,8 +13,12 @@
 #### Login => completed
 #### Apply job => completed
 #### List all applications by an user => completed
+
+### Recruiter
 #### List all applications => completed
 #### List an application details => completed
+#### Add applicant to selected list => completed
 #### Update application => completed
 #### Remove an applicant from selected list => completed
 #### Display all selected list => completed
+#### Recruiter Dashboard => completed
