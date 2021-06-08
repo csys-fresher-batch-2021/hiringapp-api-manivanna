@@ -62,12 +62,12 @@ class JobDao{
      * @param {*} updatedJob 
      */
     static async update(id, updatedData){
-        let jobQuery = `UPDATE JOBOFFERS SET JOBTITLE=$1, JOBTYPE=$2, DESCRIPTION=$3, SKILLS=$4, MINYEARS=$5, MAXYEARS=$6, 
-                        MINSALARY=$7, MAXSALARY=$8, LOCATION=$9, VACANCY=$10, QUALIFICATION=$11 WHERE ID=$12`;
+        let jobQuery = `UPDATE JOBOFFERS SET JOBTYPE=$1, DESCRIPTION=$2, SKILLS=$3, MINYEARS=$4, MAXYEARS=$5, 
+                        MINSALARY=$6, MAXSALARY=$7, VACANCY=$8, QUALIFICATION=$9 WHERE ID=$10`;
         let params = [
-                        updatedData.jobtitle, updatedData.jobtype, updatedData.description, updatedData.skills, 
-                        updatedData.minyears, updatedData.maxyears, updatedData.minsalary, updatedData.maxsalary, 
-                        updatedData.location, updatedData.vacancy, updatedData.qualification, id
+                        updatedData.jobtype, updatedData.description, updatedData.skills, 
+                        updatedData.minyears, updatedData.maxyears, updatedData.minsalary, 
+                        updatedData.maxsalary, updatedData.vacancy, updatedData.qualification, id
                     ];
         try{
             let client = await pool.connect();
@@ -93,6 +93,24 @@ class JobDao{
             console.log("Job deleted successfully");
             client.release();
             return result;
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    /**
+     * Function to check job with same location already posted.
+     * @param {*} jobtitle 
+     * @param {*} location 
+     */
+    static async checkJobExists(jobtitle, location){
+        let jobQuery = `SELECT * FROM JOBOFFERS WHERE LOWER(JOBTITLE)=LOWER($1) AND LOWER(LOCATION)=LOWER($2)`;
+        let params = [jobtitle, location];
+        try{
+            let client = await pool.connect();
+            let result = await client.query(jobQuery, params);
+            client.release();
+            return result.rows;
         } catch(err){
             console.log(err);
         }

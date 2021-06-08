@@ -53,6 +53,20 @@ class InputValidator{
     }
 
     /**
+     * Function to verify all form fields are filled by user.
+     * @param {*} job 
+     */
+    static checkUpdateFields(job){
+        let isValid = true;
+        if(this.checkEmptyData(job.jobtype) || this.checkEmptyData(job.description) || this.checkEmptyData(job.skills) 
+            || this.checkEmptyData(job.minyears) || this.checkEmptyData(job.maxyears) || this.checkEmptyData(job.minsalary) 
+            || this.checkEmptyData(job.maxsalary) || this.checkEmptyData(job.qualification)){
+                isValid = false;
+        }
+        return isValid;
+    }
+
+    /**
      * Function to check name has only alphabets, spaces and must start with alphabet.
      * @param {*} name 
      */
