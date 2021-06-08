@@ -59,6 +59,18 @@ class SelectedListController{
             res.status(400).json({message: "failed"});
         }
     }
+
+    /**
+     * Function to get selection progress report
+     */
+    static async getStatus(req, res){
+        let result = await SelectedListService.getStatus();
+        if(result != null){
+            res.status(200).json(result);
+        } else{
+            res.status(400).json({message: "failed"});
+        }
+    }
 }
 
 module.exports = SelectedListController;

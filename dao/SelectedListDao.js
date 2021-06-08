@@ -72,5 +72,22 @@ class SelectedListDao{
             console.log(err);
         }
     }
+    
+    /**
+     * Function to get selection progress report.
+     */
+    static async getStatus(){
+        let appQuery = `SELECT DISTINCT JOB.JOBTITLE, JOB.VACANCY, JOB.LOCATION,
+            (SELECT COUNT(*) AS SELECTED FROM SELECTEDLIST WHERE JOBID = JOB.ID) 
+            FROM JOBOFFERS JOB;`;
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery);
+            client.release();
+            return result.rows;
+        } catch(err){
+            console.log(err);
+        }
+    }
 }
 module.exports = SelectedListDao;

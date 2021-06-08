@@ -38,6 +38,13 @@ class SelectedListService{
     static updateScore(id, score){
         return SelectedListDao.update(id, score);
     }
+
+    /**
+     * Function to get selection progress report
+     */
+    static getStatus(){
+        return SelectedListDao.getStatus();
+    }
 }
 
 module.exports = SelectedListService;
