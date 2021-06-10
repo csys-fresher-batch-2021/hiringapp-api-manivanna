@@ -19,12 +19,14 @@ class SelectedListController{
      */
     static async addSelectedList(req, res){
         let id = req.params.id;
-        let result = await SelectedListService.addSelectedList(id);
-        if(result != null){
-            res.status(200).json({message: "success"});
-            console.log("Application added to selected list");
-        } else{
-            res.status(400).json({message: "failed"});
+        try{
+            let result = await SelectedListService.addSelectedList(id);
+            if(result != null){
+                res.status(200).json({message: "success"});
+                console.log("Application added to selected list");
+            }
+        } catch(err){
+            res.status(400).json({message: err.message});
         }
     }
 

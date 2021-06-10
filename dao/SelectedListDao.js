@@ -15,6 +15,24 @@ class SelectedListDao{
             console.log(err);
         }
     }
+
+    /**
+     * Function to check applicant already selected.
+     * @param {*} jobId 
+     * @param {*} applicationId 
+     */
+    static async findOne(jobId, applicationId){
+        let appQuery = `SELECT * FROM SELECTEDLIST WHERE JOBID=$1 AND APPLICATIONID=$2`;
+        let params = [jobId, applicationId];
+        try{
+            let client = await pool.connect();
+            let result = await client.query(appQuery, params);
+            client.release();
+            return result.rows;
+        } catch(err){
+            console.log(err);
+        }
+    }
     
     /**
      * Function to add new application to selectedlist table.
@@ -32,7 +50,7 @@ class SelectedListDao{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
             client.release();
-            return result;
+            return result.rows;
         } catch(err){
             console.log(err);
         }
@@ -77,7 +95,7 @@ class SelectedListDao{
      * Function to get selection progress report.
      */
     static async getStatus(){
-        let appQuery = `SELECT DISTINCT JOB.JOBTITLE, JOB.VACANCY, JOB.LOCATION,
+        let appQuery = `SELECT DISTINCT JOB.ID, JOB.JOBTITLE, JOB.VACANCY, JOB.LOCATION,
             (SELECT COUNT(*) AS SELECTED FROM SELECTEDLIST WHERE JOBID = JOB.ID) 
             FROM JOBOFFERS JOB;`;
         try{

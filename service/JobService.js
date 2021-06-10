@@ -21,14 +21,18 @@ class JobService{
         let isFormFilled = InputValidator.checkFormFields(job);     //validate all form fields are field.
         let isValidSalary = InputValidator.validateSalary(job.minsalary, job.maxsalary);    //validate minsalary is less than maxsalary.
         let isValidExperience = InputValidator.validateExperience(job.minyears, job.maxyears);  //validate minExp is less than maxExp.
-
+        let isValidEndDate = InputValidator.isValidDate(job.end_date);
         if(!isFormFilled){
             throw new Error("All fields are not filled");
         } else if(!isValidSalary){
             throw new Error("Invalid Salary");
         } else if(!isValidExperience){
             throw new Error("Invalid Experience");
-        }          
+        } else if(!isValidEndDate){
+            throw new Error("Invalid end date");
+        }
+        let today = new Date().toJSON().substr(0, 10);
+        job["created_at"] = today;          
         return JobDao.save(job);
     }
 
@@ -49,6 +53,7 @@ class JobService{
         let isFormFilled = InputValidator.checkUpdateFields(updatedData);     //validate all form fields are field.
         let isValidSalary = InputValidator.validateSalary(updatedData.minsalary, updatedData.maxsalary);    //validate minsalary is less than maxsalary.
         let isValidExperience = InputValidator.validateExperience(updatedData.minyears, updatedData.maxyears);  //validate minExp is less than maxExp.
+        let isValidEndDate = InputValidator.isValidDate(updatedData.end_date);
 
         if(!isFormFilled){
             throw new Error("All fields are not filled");
@@ -56,7 +61,9 @@ class JobService{
             throw new Error("Invalid Salary");
         } else if(!isValidExperience){
             throw new Error("Invalid Experience");
-        }          
+        } else if(!isValidEndDate){
+            throw new Error("Invalid end date");
+        }        
         return JobDao.update(id, updatedData);
     }
 
