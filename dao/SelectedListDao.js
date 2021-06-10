@@ -50,7 +50,7 @@ class SelectedListDao{
             let client = await pool.connect();
             let result = await client.query(appQuery, params);
             client.release();
-            return result.rows;
+            return result;
         } catch(err){
             console.log(err);
         }

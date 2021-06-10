@@ -30,7 +30,7 @@ class SelectedListService{
             });
             return SelectedListDao.save(application);
         } else{
-            console.log("No record found");
+            throw new Error("No such application found");
         }
     }
 
