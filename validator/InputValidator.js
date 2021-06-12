@@ -34,7 +34,7 @@ class InputValidator{
         if( this.checkEmptyData(job.jobtitle) || this.checkEmptyData(job.jobtype) || this.checkEmptyData(job.description) 
             || this.checkEmptyData(job.skills) || this.checkEmptyData(job.minyears) || this.checkEmptyData(job.maxyears) 
             || this.checkEmptyData(job.minsalary) || this.checkEmptyData(job.maxsalary) || this.checkEmptyData(job.location) 
-            || this.checkEmptyData(job.qualification)){
+            || this.checkEmptyData(job.qualification) || this.checkEmptyData(job.end_date)){
                 valid = false;
         }
         return valid;
@@ -60,7 +60,7 @@ class InputValidator{
         let isValid = true;
         if(this.checkEmptyData(job.jobtype) || this.checkEmptyData(job.description) || this.checkEmptyData(job.skills) 
             || this.checkEmptyData(job.minyears) || this.checkEmptyData(job.maxyears) || this.checkEmptyData(job.minsalary) 
-            || this.checkEmptyData(job.maxsalary) || this.checkEmptyData(job.qualification)){
+            || this.checkEmptyData(job.maxsalary) || this.checkEmptyData(job.qualification) || this.checkEmptyData(job.end_date)){
                 isValid = false;
         }
         return isValid;
@@ -118,6 +118,23 @@ class InputValidator{
             valid = true;
         }
         return valid;
+    }
+    /**
+     * Function to check entered date is valid.
+     * @param {*} dateString
+     */
+    static isValidDate(dateString) {
+        let isValid = false;
+        let regEx = /^\d{4}-\d{2}-\d{2}$/;
+        if(dateString.match(regEx)){
+            let todayString = new Date().toJSON().substr(0,10);
+            let today = new Date(todayString);
+            let endDate = new Date(dateString);
+            if(endDate >= today){
+                isValid = true;
+            }
+        }
+        return isValid;
     }
 }
 module.exports = InputValidator;

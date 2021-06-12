@@ -18,8 +18,12 @@ class ApplicationService{
     static async saveApplication(jobId, application){
         let jobDetails = await JobService.getJobById(jobId);
         let alreadyApplied = await ApplicationDao.checkApplicationDone(jobId, application.email);
+        let applicationOpened = InputValidator.isValidDate(jobDetails.end_date);
         if(alreadyApplied.length > 0){
             throw new Error("Application already submitted");
+        }
+        if(!applicationOpened){
+            throw new Error("Registration closed");
         }
         let isInValidName = InputValidator.checkEmptyData(application.name);
         let isInValidEmail = InputValidator.checkEmptyData(application.email);

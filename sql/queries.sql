@@ -8,7 +8,9 @@ create table joboffers(
     maxyears int,
     minsalary int,
     maxsalary int,
-    location text
+    location text,
+    created_at varchar(10),
+    end_date varchar(10)
 );
 
 create table applicant(
@@ -30,7 +32,8 @@ create table applications(
     address text,
     score int,
     status text,
-    comments text
+    comments text,
+    created_at date
 );
 
 create table selectedlist(
@@ -40,5 +43,6 @@ create table selectedlist(
     name text,
     email text,
     jobtitle text,
-    score int
+    score int,
+    created_at date
 );

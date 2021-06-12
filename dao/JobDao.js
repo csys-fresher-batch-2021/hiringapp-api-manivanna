@@ -23,11 +23,11 @@ class JobDao{
     static async save(job){
         let jobQuery = `INSERT INTO JOBOFFERS (
                             JOBTITLE, JOBTYPE, DESCRIPTION, SKILLS, MINYEARS, MAXYEARS, 
-                            MINSALARY, MAXSALARY, LOCATION, VACANCY, QUALIFICATION) 
-                            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
+                            MINSALARY, MAXSALARY, LOCATION, VACANCY, QUALIFICATION, CREATED_AT, END_DATE) 
+                            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`;
         let params = [
-                        job.jobtitle, job.jobtype, job.description, job.skills, job.minyears, job.maxyears,
-                        job.minsalary, job.maxsalary, job.location, job.vacancy, job.qualification
+                        job.jobtitle, job.jobtype, job.description, job.skills, job.minyears, job.maxyears, job.minsalary, 
+                        job.maxsalary, job.location, job.vacancy, job.qualification, job.created_at, job.end_date
                     ];
         try{
             let client = await pool.connect();
@@ -63,11 +63,12 @@ class JobDao{
      */
     static async update(id, updatedData){
         let jobQuery = `UPDATE JOBOFFERS SET JOBTYPE=$1, DESCRIPTION=$2, SKILLS=$3, MINYEARS=$4, MAXYEARS=$5, 
-                        MINSALARY=$6, MAXSALARY=$7, VACANCY=$8, QUALIFICATION=$9 WHERE ID=$10`;
+                        MINSALARY=$6, MAXSALARY=$7, VACANCY=$8, QUALIFICATION=$9, END_DATE=$10 WHERE ID=$11`;
         let params = [
                         updatedData.jobtype, updatedData.description, updatedData.skills, 
                         updatedData.minyears, updatedData.maxyears, updatedData.minsalary, 
-                        updatedData.maxsalary, updatedData.vacancy, updatedData.qualification, id
+                        updatedData.maxsalary, updatedData.vacancy, updatedData.qualification, 
+                        updatedData.end_date, id
                     ];
         try{
             let client = await pool.connect();

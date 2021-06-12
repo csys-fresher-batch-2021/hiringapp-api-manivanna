@@ -16,9 +16,21 @@ class SelectedListService{
     static async addSelectedList(id){
         let application = await ApplicationService.getApplicationById(id);
         if(application != null){
+            let dashboard = await SelectedListDao.getStatus();
+            let selectionData = await SelectedListDao.findOne(application.jobid, application.id);
+            if(selectionData.length > 0){
+                throw new Error("Applicant already selected");
+            }
+            dashboard.forEach(element => {
+                if(element.id == parseInt(application.jobid)){
+                   if(element.vacancy == parseInt(element.selected)){
+                        throw new Error("Vacancy for this job is filled, try updating job post");
+                   } 
+                }
+            });
             return SelectedListDao.save(application);
         } else{
-            console.log("No record found");
+            throw new Error("No such application found");
         }
     }
 

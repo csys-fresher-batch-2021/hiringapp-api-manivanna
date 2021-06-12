@@ -43,4 +43,4 @@ app.post('/api/user/login', ApplicantController.authenticateUser);
 app.post('/api/user/:jobid/apply', ApplicationController.saveApplication);
 app.get('/api/user/applications/:email', ApplicationController.getApplicationsByEmail);
 
-app.listen(port, () => console.log(`Hiring app listening on port ${port}!`))
+app.listen(port, () => console.log(`Hiring app listening on port ${port}!`));
