@@ -11,6 +11,7 @@ const JobController = require('./controller/JobController.js');
 const ApplicantController = require('./controller/ApplicantController.js');
 const ApplicationController = require('./controller/ApplicationController.js');
 const SelectedListController = require('./controller/SelectedListController.js');
+const RecruiterController = require('./controller/RecruiterController.js');
 
 //body-parser configuration
 app.use(bodyParser.urlencoded({
@@ -28,6 +29,7 @@ app.delete('/api/jobs/:id', JobController.deleteJobPost);
 app.get('/api/jobs/:id', JobController.getJobById);
 
 //Recruiter Routes
+app.post('/api/recruiter/login', RecruiterController.authenticate);
 app.get('/api/applications', ApplicationController.getApplications);
 app.get("/api/applications/:id", ApplicationController.getApplicationById);
 app.patch('/api/applications/:id', ApplicationController.updateApplication);
