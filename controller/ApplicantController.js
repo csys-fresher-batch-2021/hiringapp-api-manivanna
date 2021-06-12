@@ -29,7 +29,7 @@ class ApplicantController{
             result[0]['message'] = "success";
             res.status(200).json(result[0]);
         } else{
-            res.status(400).json({message: "Invalid Credentials"});
+            res.status(400).json({errorMessage: "Invalid Credentials"});
         }
     }
 }

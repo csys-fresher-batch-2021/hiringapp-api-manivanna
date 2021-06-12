@@ -9,7 +9,7 @@ class SelectedListController{
         if(result != null){
             res.status(200).json(result);
         } else{
-            res.status(400).json({message: "failed"});
+            res.status(400).json({errorMessage: "failed"});
         }
     }
 
@@ -26,7 +26,7 @@ class SelectedListController{
                 console.log("Application added to selected list");
             }
         } catch(err){
-            res.status(400).json({message: err.message});
+            res.status(400).json({errorMessage: err.message});
         }
     }
 
@@ -41,7 +41,7 @@ class SelectedListController{
             res.status(200).json({message: "success"});
             console.log("Application removed from selected list");
         } else{
-            res.status(400).json({message: "failed"});
+            res.status(400).json({errorMessage: "failed"});
         }
     }
 
@@ -58,7 +58,7 @@ class SelectedListController{
             res.status(200).json({message: "success"});
             console.log("Score updated");
         } else{
-            res.status(400).json({message: "failed"});
+            res.status(400).json({errorMessage: "failed"});
         }
     }
 
@@ -70,7 +70,7 @@ class SelectedListController{
         if(result != null){
             res.status(200).json(result);
         } else{
-            res.status(400).json({message: "failed"});
+            res.status(400).json({errorMessage: "failed"});
         }
     }
 }

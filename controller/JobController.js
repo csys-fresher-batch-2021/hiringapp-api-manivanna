@@ -8,7 +8,11 @@ class JobController{
      */
    static async getJobPosts(req, res){
         let result = await JobService.getJobPosts();
-        res.send(result);
+        if(result != null){
+            res.status(200).json(result);
+        } else{
+            res.status(400).json({errorMessage: "No Jobs found"});
+        }
     }
     
    /**
@@ -34,8 +38,12 @@ class JobController{
     */
     static async getJobById(req, res){
         let id = req.params.id;
-        let result = await JobService.getJobById(id); 
-        res.send(result);
+        let result = await JobService.getJobById(id);
+        if(result != null){
+            res.status(200).json(result);
+        } else{
+            res.status(400).json({errorMessage: "Invalid job id"});
+        }
     }
 
    /**
@@ -51,7 +59,7 @@ class JobController{
                  res.status(200).json({message: "success"});
             }
         } catch(err){
-            res.status(400).json({message: err.message});
+            res.status(400).json({errorMessage: err.message});
         }
     }
 
@@ -66,7 +74,7 @@ class JobController{
         if(result.rowCount > 0){
             res.status(200).json({message: "success"});
         } else{
-            res.status(400).json({message: "failed"});
+            res.status(400).json({errorMessage: "failed"});
         }
     }
 }
