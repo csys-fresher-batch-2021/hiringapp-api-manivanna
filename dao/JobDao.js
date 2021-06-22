@@ -5,7 +5,7 @@ class JobDao{
      * Function to retrieve all job posts from database.
      */
     static async getJobPosts(){
-        let jobQuery = 'SELECT * FROM JOBOFFERS';
+        let jobQuery = 'SELECT * FROM JOBOFFERS WHERE ACTIVE=1';
         try{
             let client = await pool.connect();
             let result = await client.query(jobQuery);
@@ -112,6 +112,24 @@ class JobDao{
             let result = await client.query(jobQuery, params);
             client.release();
             return result.rows;
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    /**
+     * Function to a archive job post in database using job id.
+     * @param {*} updatedJob 
+     */
+    static async archivePost(id){
+        let jobQuery = `UPDATE JOBOFFERS SET ACTIVE=0 WHERE ID=$1`;
+        let params = [id];
+        try{
+            let client = await pool.connect();
+            let result = client.query(jobQuery, params);
+            console.log("Job archived successfully");
+            client.release();
+            return result;
         } catch(err){
             console.log(err);
         }

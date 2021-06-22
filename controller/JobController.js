@@ -77,6 +77,23 @@ class JobController{
             res.status(400).json({errorMessage: "failed"});
         }
     }
+
+    /**
+    * Function to get archive job post.
+    * @param {*} req 
+    * @param {*} res 
+    */
+    static async archivePost(req, res){
+        let id = req.params.id;
+        try{
+            let result = await JobService.archivePost(id);
+            if(result != null){
+                 res.status(200).json({message: "success"});
+            }
+        } catch(err){
+            res.status(400).json({errorMessage: err.message});
+        }
+    }
 }
 
 module.exports = JobController;

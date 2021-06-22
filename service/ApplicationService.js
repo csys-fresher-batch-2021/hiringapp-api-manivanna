@@ -28,9 +28,9 @@ class ApplicationService{
         let isInValidName = InputValidator.checkEmptyData(application.name);
         let isInValidEmail = InputValidator.checkEmptyData(application.email);
         let isInValidMobile = InputValidator.checkEmptyData(application.mobile);
-        let isInValidYop = InputValidator.checkEmptyData(application.yop);
-        let isInValidExperience = InputValidator.checkEmptyData(application.experience);
         let isInValidAddress = InputValidator.checkEmptyData(application.address);
+        let isValidYop = InputValidator.validateYearOfPassing(application.yop);
+        let isValidExperience = InputValidator.validExperienceYear(application.experience);
 
         if(isInValidName){
             throw new Error("Invalid Name");
@@ -38,9 +38,9 @@ class ApplicationService{
             throw new Error("Invalid Email");
         } else if(isInValidMobile){
             throw new Error("Invalid Mobile number");
-        } else if(isInValidYop){
+        } else if(!isValidYop){
             throw new Error("Invalid Year of Passing");
-        } else if(isInValidExperience){
+        } else if(!isValidExperience){
             throw new Error("Invalid Experience");
         } else if(isInValidAddress){
             throw new Error("Invalid Address");

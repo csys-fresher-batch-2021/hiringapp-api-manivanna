@@ -74,6 +74,14 @@ class JobService{
     static deleteJobPost(id){
         return JobDao.delete(id);
     }
+
+    /**
+     * Function to archive a job post.
+     * @param {*} id 
+     */
+    static archivePost(id){
+        return JobDao.archivePost(id);
+    }
 }
 
 module.exports = JobService;
