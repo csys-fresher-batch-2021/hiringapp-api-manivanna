@@ -27,6 +27,7 @@ app.post('/api/jobs', JobController.saveJobPost);
 app.put('/api/jobs/:id', JobController.updateJobPost);
 app.delete('/api/jobs/:id', JobController.deleteJobPost);
 app.get('/api/jobs/:id', JobController.getJobById);
+app.put('/api/jobs/:id/archive', JobController.archivePost);
 
 //Recruiter Routes
 app.post('/api/recruiter/login', RecruiterController.authenticate);
@@ -42,6 +43,8 @@ app.get('/api/dashboard', SelectedListController.getStatus);
 //Applicant Routes
 app.post('/api/user/signup', ApplicantController.addNewUser);
 app.post('/api/user/login', ApplicantController.authenticateUser);
+app.get('/api/user/profile/:email', ApplicantController.getProfile);
+app.post('/api/user/profile/:email', ApplicantController.updateProfile);
 app.post('/api/user/:jobid/apply', ApplicationController.saveApplication);
 app.get('/api/user/applications/:email', ApplicationController.getApplicationsByEmail);
 

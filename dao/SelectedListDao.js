@@ -5,7 +5,8 @@ class SelectedListDao{
      * @param {*} application 
      */
     static async getAll(){
-        let appQuery = `SELECT * FROM SELECTEDLIST`;
+        let appQuery = `select a.jobid, a.applicationid, a.name, a.email, a.jobtitle, a.score, b.location, b.active 
+                            from selectedlist as a inner join joboffers as b on a.jobid=b.id where b.active=1`;
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery);

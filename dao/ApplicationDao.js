@@ -5,7 +5,8 @@ class ApplicationDao{
      * Function to retrieve all applications from database.
      */
     static async getApplications(){
-        let appQuery = 'SELECT * FROM APPLICATIONS';
+        let appQuery = `SELECT A.*, B.ID, B.ACTIVE FROM APPLICATIONS AS A 
+                        INNER JOIN JOBOFFERS AS B ON A.JOBID=B.ID WHERE ACTIVE=1`;
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery);

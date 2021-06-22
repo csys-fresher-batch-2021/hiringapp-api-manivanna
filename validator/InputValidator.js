@@ -102,7 +102,7 @@ class InputValidator{
      */
     static validateYearOfPassing(yop){
         let valid = false;
-        if(parseInt(yop) > 0 && yop.length == 4){
+        if(yop > 0 && yop.toString().length == 4){
             valid = true;
         }
         return valid;
@@ -114,7 +114,7 @@ class InputValidator{
      */
     static validExperienceYear(experience){
         let valid = false;
-        if(experience.length >= 1 && experience.length <= 2){
+        if(experience.toString().length >= 1 && experience.toString().length <= 2 && experience >= 0){
             valid = true;
         }
         return valid;
@@ -135,6 +135,31 @@ class InputValidator{
             }
         }
         return isValid;
+    }
+
+    /**
+     * Function to validate email
+     * @param {*} email 
+     */
+    static validateEmail(email){
+        let valid = false;
+        let pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if(email.match(pattern)){
+            valid = true;
+        }
+        return valid;
+    }
+
+    /**
+     * Function to validate password length
+     * @param {*} email 
+     */
+    static validatePassword(password){
+        let valid = false;
+        if(password.length >= 8){
+            valid = true;
+        }
+        return valid;
     }
 }
 module.exports = InputValidator;

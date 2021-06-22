@@ -32,6 +32,40 @@ class ApplicantController{
             res.status(400).json({errorMessage: "Invalid Credentials"});
         }
     }
+
+    /**
+     * Function to get an applicant profile details.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async getProfile(req, res){
+        let email = req.params.email;
+        try{
+            let result = await ApplicantService.getProfile(email);
+            if(result != null){
+                res.status(200).json(result[0]);
+            }
+        } catch(err){
+            res.status(400).json({errorMessage: err.message});
+        }
+    }
+
+    /**
+     * Function to update an applicant profile details.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async updateProfile(req, res){
+        let email = req.params.email;
+        try{
+            let result = await ApplicantService.updateProfile(email, req.body);
+            if(result != null){
+                res.status(200).json({message: "Success"});
+            }
+        } catch(err){
+            res.status(400).json({errorMessage: err.message});
+        }
+    }
 }
 
 module.exports = ApplicantController;
