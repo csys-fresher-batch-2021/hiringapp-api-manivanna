@@ -23,11 +23,11 @@ class JobDao{
     static async save(job){
         let jobQuery = `INSERT INTO JOBOFFERS (
                             JOBTITLE, JOBTYPE, DESCRIPTION, SKILLS, MINYEARS, MAXYEARS, 
-                            MINSALARY, MAXSALARY, LOCATION, VACANCY, QUALIFICATION, CREATED_AT, END_DATE) 
-                            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`;
+                            MINSALARY, MAXSALARY, LOCATION, VACANCY, QUALIFICATION, CREATED_AT, END_DATE, CREATED_BY) 
+                            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)`;
         let params = [
                         job.jobtitle, job.jobtype, job.description, job.skills, job.minyears, job.maxyears, job.minsalary, 
-                        job.maxsalary, job.location, job.vacancy, job.qualification, job.created_at, job.end_date
+                        job.maxsalary, job.location, job.vacancy, job.qualification, job.created_at, job.end_date, job.created_by
                     ];
         try{
             let client = await pool.connect();

@@ -98,7 +98,7 @@ class SelectedListDao{
     static async getStatus(){
         let appQuery = `SELECT DISTINCT JOB.ID, JOB.JOBTITLE, JOB.VACANCY, JOB.LOCATION,
             (SELECT COUNT(*) AS SELECTED FROM SELECTEDLIST WHERE JOBID = JOB.ID) 
-            FROM JOBOFFERS JOB;`;
+            FROM JOBOFFERS JOB WHERE JOB.ACTIVE=1;`;
         try{
             let client = await pool.connect();
             let result = await client.query(appQuery);
