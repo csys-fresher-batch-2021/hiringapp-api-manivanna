@@ -1,4 +1,5 @@
 let ApplicantService = require('../service/ApplicantService.js');
+let AuthToken = require('../middleware/AuthToken.js');
 
 class ApplicantController{
     /**
@@ -26,7 +27,8 @@ class ApplicantController{
         let result = await ApplicantService.authenticateUser(req.body);
         if(result.length > 0){
             delete result[0].password;
-            result[0]['message'] = "success";
+            let token = AuthToken.generateToken(result[0]);
+            result[0].token = token;
             res.status(200).json(result[0]);
         } else{
             res.status(400).json({errorMessage: "Invalid Credentials"});
@@ -40,13 +42,17 @@ class ApplicantController{
      */
     static async getProfile(req, res){
         let email = req.params.email;
-        try{
-            let result = await ApplicantService.getProfile(email);
-            if(result != null){
-                res.status(200).json(result[0]);
+        if(req.user.email === email){
+            try{
+                let result = await ApplicantService.getProfile(email);
+                if(result != null){
+                    res.status(200).json(result[0]);
+                }
+            } catch(err){
+                res.status(400).json({errorMessage: err.message});
             }
-        } catch(err){
-            res.status(400).json({errorMessage: err.message});
+        } else {
+            res.status(401).json({errorMessage: "Unauthorized"});
         }
     }
 
@@ -57,13 +63,17 @@ class ApplicantController{
      */
     static async updateProfile(req, res){
         let email = req.params.email;
-        try{
-            let result = await ApplicantService.updateProfile(email, req.body);
-            if(result != null){
-                res.status(200).json({message: "Success"});
+        if(req.user.email === email){
+            try{
+                let result = await ApplicantService.updateProfile(email, req.body);
+                if(result != null){
+                    res.status(200).json({message: "Success"});
+                }
+            } catch(err){
+                res.status(400).json({errorMessage: err.message});
             }
-        } catch(err){
-            res.status(400).json({errorMessage: err.message});
+        } else{
+            res.status(401).json({errorMessage: "Unauthorized"});
         }
     }
 }

@@ -22,13 +22,18 @@ class ApplicationController{
      */
     static async saveApplication(req, res){
         let id = req.params.jobid;
-        try{
-            let result = await ApplicationService.saveApplication(id, req.body);
-            if(result != null){
-                res.status(200).json({message: "success"});
+        let email = req.body.email;
+        if(req.user.email === email){
+            try{
+                let result = await ApplicationService.saveApplication(id, req.body);
+                if(result != null){
+                    res.status(200).json({message: "success"});
+                }
+            } catch(err){
+                res.status(400).json({errorMessage: err.message});   
             }
-        } catch(err){
-            res.status(400).json({errorMessage: err.message});   
+        } else{
+            res.status(401).json({errorMessage: "Unauthorized"});   
         }
     }
 
@@ -68,11 +73,15 @@ class ApplicationController{
      */
     static async getApplicationsByEmail(req, res){
         let email = req.params.email;
-        let result = await ApplicationService.getApplicationsByEmail(email);
-        if(result.length > 0){
-            res.status(200).json(result);
+        if(req.user.email === email){
+            let result = await ApplicationService.getApplicationsByEmail(email);
+            if(result.length > 0){
+                res.status(200).json(result);
+            } else{
+                res.status(400).json({errorMessage: "failed"});
+            }
         } else{
-            res.status(400).json({errorMessage: "failed"});
+            res.status(401).json({errorMessage: "Unauthorized"});
         }
     }
 }
