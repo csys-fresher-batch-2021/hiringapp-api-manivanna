@@ -9,15 +9,23 @@ create table joboffers(
     minsalary int,
     maxsalary int,
     location text,
+    vacancy int,
+    qualification int,
     created_at varchar(10),
-    end_date varchar(10)
+    end_date varchar(10),
+    active int,
+    created_by text
 );
 
 create table applicant(
     id serial primary key,
     name text,
     email text,
-    password text
+    password text,
+    mobile text,
+    yop int,
+    experience int,
+    address text
 );
 
 create table applications(
@@ -45,4 +53,11 @@ create table selectedlist(
     jobtitle text,
     score int,
     created_at date
+);
+
+create table recruiter(
+    id serial primary key,
+    email text,
+    password text,
+    name text
 );
