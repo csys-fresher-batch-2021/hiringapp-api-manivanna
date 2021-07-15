@@ -56,7 +56,7 @@ class JobController{
         try{
             let result = await JobService.updateJobPost(id, req.body);
             if(result != null){
-                 res.status(200).json({message: "success"});
+                res.status(200).json({message: "success"});
             }
         } catch(err){
             res.status(400).json({errorMessage: err.message});

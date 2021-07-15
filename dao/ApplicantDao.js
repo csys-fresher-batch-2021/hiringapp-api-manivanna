@@ -23,7 +23,7 @@ class ApplicantDao{
      * @param {*} user 
      */
     static async authenticateUser(email, password){
-        const userQuery = "SELECT * FROM APPLICANT WHERE EMAIL=$1 AND PASSWORD=$2";
+        const userQuery = "SELECT ID, NAME, EMAIL FROM APPLICANT WHERE EMAIL=$1 AND PASSWORD=$2";
         let params = [email, password];
         try{
             let client = await pool.connect();
